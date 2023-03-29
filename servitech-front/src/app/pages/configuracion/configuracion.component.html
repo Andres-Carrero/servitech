@@ -1,0 +1,14 @@
+<app-my-tabs 
+  [(optionsTabs)]="optionsTabs" 
+  [(intialTabCode)]="initialTab"
+  (getTabActive)="currentTab = $event.code" 
+></app-my-tabs>
+
+<div class="content-v2" *ngIf="currentTab == 1">
+  <mat-slide-toggle>Modo Oscuro</mat-slide-toggle>
+</div>
+
+<div class="content-v2" *ngIf="currentTab == 2">
+  
+</div>
+

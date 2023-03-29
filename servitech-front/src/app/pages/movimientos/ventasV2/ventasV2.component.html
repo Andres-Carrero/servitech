@@ -1,0 +1,243 @@
+<app-my-tabs 
+  [(optionsTabs)]="optionsTabs" 
+  [(intialTabCode)]="initialTab"
+  (getTabActive)="currentTab = $event.code" 
+></app-my-tabs>
+
+<div class="content-v2">
+
+  <div *ngIf="currentTab == 1">
+
+    <div *ngIf="validateUser">
+      <mat-form-field appearance="outline" style="width: 30%;" >
+        <mat-label>Identificación del Cliente</mat-label>
+        <input matInput id="input1" (keyup)="searchCliente($event)" [(ngModel)]="idCliente" autocomplete="off" type="number">
+        <mat-hint><a (click)="changeFilterClient(1)" class="textsLogin" *ngIf="idCliente">¿No encuentras al cliente o no existe?</a></mat-hint>
+      </mat-form-field><br><br>
+    
+      <table class="tableVenta">
+        <thead class="tableHead">
+          <tr>
+            <th></th>
+            <th>N°</th>
+            <th>Identificación</th>
+            <th>Nombre Completo</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Dirección</th>
+          </tr>
+        </thead>
+        <tbody class="tableBody">
+          <tr *ngFor="let item of listUsers; let i = index" (click)="selectUser(i, item)">
+            <td><mat-checkbox [(ngModel)]="item.check" disabled></mat-checkbox></td>
+            <td>{{i+1}}</td>
+            <td>{{item.usu_identificacion}}</td>
+            <td>{{item.usu_nombre}} {{item.usu_apellido}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.usu_telefono}}</td>
+            <td>{{item.usu_direccion}}</td>
+          </tr>
+          <tr *ngIf="!idCliente">
+            <td colspan="7" style="text-align: center;">Debe buscar un cliente</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="!validateUser">
+      <h2 style="text-align: center;" >Registrar Cliente</h2>
+      <mat-grid-list cols="3" rowHeight="90px">
+        <mat-grid-tile [colspan]="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Identificación</mat-label>
+            <input matInput [(ngModel)]="idCliente" autocomplete="off" type="number" [readonly]="readonlyUser">
+            <mat-hint><a (click)="changeFilterClient(2)" class="textsLogin">¿El cliente ya existe?</a></mat-hint>
+          </mat-form-field>
+        </mat-grid-tile>
+    
+        <mat-grid-tile [colspan]="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombres</mat-label>
+            <input matInput [(ngModel)]="nombres" autocomplete="off" type="text" [readonly]="readonlyUser">
+          </mat-form-field>
+        </mat-grid-tile>
+    
+        <mat-grid-tile [colspan]="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input matInput [(ngModel)]="apellidos" autocomplete="off" type="text" [readonly]="readonlyUser">
+          </mat-form-field>
+        </mat-grid-tile>
+    
+        <mat-grid-tile [colspan]="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="email" autocomplete="off" type="text" [readonly]="readonlyUser">
+          </mat-form-field>
+        </mat-grid-tile>
+    
+        <mat-grid-tile [colspan]="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Numero de Telefono</mat-label>
+            <input matInput [(ngModel)]="telefono" autocomplete="off" type="number" [readonly]="readonlyUser">
+          </mat-form-field>
+        </mat-grid-tile>
+    
+        <mat-grid-tile [colspan]="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input matInput [(ngModel)]="direccion" autocomplete="off" type="text" [readonly]="readonlyUser">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list><br>
+
+      <div class="buttonsForms">
+        <button mat-raised-button color="primary" class="buttons" style="margin-left: 30px;" (click)="guardarUsuario()">
+          <mat-icon style="margin-right: 10px;">person_add</mat-icon>Registrar Cliente
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="currentTab == 2">
+    <mat-grid-list [cols]="3" rowHeight="100px">
+
+      <mat-grid-tile [colspan]="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Productos</mat-label>
+          <input type="text" (input)="validateProducts()" [(ngModel)]="product" matInput [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of listOptionsProductos" [value]="option.prod_nombre" (click)="agregarCarrito(option)">
+              {{option.prod_id}}: {{option.prod_nombre}} ({{option.prod_marca}})
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </mat-grid-tile>
+  
+    </mat-grid-list>
+  
+    <div>
+      <table class="tableVenta">
+        <thead class="tableHead">
+          <tr >
+            <th style="width: 50px; text-align: center;">N°</th>
+            <th style="width: 350px; text-align: center;">Producto</th>
+            <th style="width: 100px; text-align: center;">Cantidad</th>
+            <th style="width: 150px; text-align: center;">Precio Unitario</th>
+            <th style="width: 150px; text-align: center;">Total</th>
+          </tr>
+        </thead>
+        <tbody class="tableBody">
+          <tr *ngIf="listProductos.length == 0">
+            <td colspan="5" style="text-align: center; height: 100px;">Debe agregar productos al carrito</td>
+          </tr>
+          <tr *ngFor="let item of listProductos; let i = index" style="padding-bottom: 10px;">
+            <td style="width: 50px; text-align: center;">{{i+1}}</td>
+            <td style="width: 350px; text-align: center;">{{item.prod_nombre}} ({{item.prod_marca}})</td>
+            <td style="width: 100px; text-align: center;">
+              <div style="display: flex; text-align: center;">
+                <mat-icon (click)="restar(i)" class="icons">arrow_back_ios</mat-icon>
+                <div style="width: 90%;">{{item.buyCantidad}}</div>
+                <mat-icon (click)="sumar(i)" class="icons">arrow_forward_ios</mat-icon>
+              </div>
+            </td>
+            <td style="width: 150px; text-align: center;">{{item.prod_precio}}</td>
+            <td style="width: 150px; text-align: center;">{{item.subTotalView}}</td>
+          </tr>
+          <tr>
+            <td colspan="4" style="text-align: right;">
+              <p style="line-height: 0; margin-top: 10px; margin-right: 15px">Total a pagar</p>
+            </td>
+            <td style="text-align: center;">{{totalView}}</td>
+          </tr>
+         
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="currentTab == 3">
+
+      <div class="center">
+        <div style="width: 50%;"><br>
+          <mat-grid-list cols="2" rowHeight="80px">
+            <mat-grid-tile [colspan]="1">
+              <mat-form-field appearance="outline">
+                <mat-label>Nombre del Cliente</mat-label>
+                <input matInput [(ngModel)]="nameClient" autocomplete="off" type="text" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+        
+            <mat-grid-tile [colspan]="1">
+              <mat-form-field appearance="outline">
+                <mat-label>Identificación del Cliente</mat-label>
+                <input matInput [(ngModel)]="selectUserValue.usu_identificacion" autocomplete="off" type="text" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+        
+            <mat-grid-tile [colspan]="1">
+              <mat-form-field appearance="outline">
+                <mat-label>Telefono del Cliente</mat-label>
+                <input matInput [(ngModel)]="selectUserValue.usu_telefono" autocomplete="off" type="text" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+        
+            <mat-grid-tile [colspan]="1">
+              <mat-form-field appearance="outline">
+                <mat-label>Dirección del Cliente</mat-label>
+                <input matInput [(ngModel)]="selectUserValue.usu_direccion" autocomplete="off" type="text" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+        
+            <mat-grid-tile [colspan]="1">
+              <mat-form-field appearance="outline">
+                <mat-label>Total Productos</mat-label>
+                <input matInput [(ngModel)]="totalView" autocomplete="off" type="text" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1">
+              <mat-form-field appearance="outline">
+                <mat-label>Iva</mat-label>
+                <input matInput [(ngModel)]="iva" autocomplete="off" type="number" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="2">
+              <mat-form-field appearance="outline" style="width: 98%;">
+                <mat-label>Total a Pagar</mat-label>
+                <input matInput [(ngModel)]="ivaTotalView" autocomplete="off" type="text" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+        
+            <mat-grid-tile [colspan]="1">
+              <mat-form-field appearance="outline">
+                <mat-label>Recibido</mat-label>
+                <input matInput [(ngModel)]="recibido" autocomplete="off" type="number" (input)="calculateChange()">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [colspan]="1">
+              <mat-form-field appearance="outline">
+                <mat-label>Cambio</mat-label>
+                <input matInput [(ngModel)]="cambioView" autocomplete="off" type="text" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list><br>
+
+          <div class="center">
+            <button  mat-raised-button color="primary" class="buttons" (click)="saved()" [disabled]="validateButton">
+              <mat-icon  style="margin-right: 10px;">shopping_cart</mat-icon> Confirmar Venta
+            </button>
+          </div>
+        </div>
+
+        
+      </div>
+
+    
+  </div>
+
+
+
+</div>

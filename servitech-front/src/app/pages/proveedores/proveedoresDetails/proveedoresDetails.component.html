@@ -1,0 +1,43 @@
+<div class="content-v2">
+  <h1 style="text-align: center;">Nuevo Proveedor</h1>
+
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Codigo</mat-label>
+        <input matInput [(ngModel)]="codigo" autocomplete="off" type="number">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="nombre" autocomplete="off" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="email" autocomplete="off" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Telefono</mat-label>
+        <input matInput [(ngModel)]="telefono" autocomplete="off" type="number">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+
+  <div class="buttonsForms">
+    <button  mat-raised-button color="primary" class="buttons" style="margin-left: 30px;" (click)="guardar()">
+      <mat-icon  style="margin-right: 10px;">save</mat-icon>Guardar
+    </button>
+  </div>
+  
+    
+  </div>
+

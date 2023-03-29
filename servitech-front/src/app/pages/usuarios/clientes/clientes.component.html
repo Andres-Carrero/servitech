@@ -1,0 +1,171 @@
+<app-my-tabs 
+  *ngIf="validateUrl == 3"
+  [(optionsTabs)]="optionsTabs" 
+  [(intialTabCode)]="initialTab"
+  [(showOff)]="off"
+  (getTabActive)="currentTab = $event.code"
+  (filterShow)="optionsTabs"
+></app-my-tabs>
+
+<div class="content-v2" *ngIf="currentTab == 1"><br>
+  <h1 style="text-align: center;" *ngIf="validateUrl != 3">{{user}}</h1>
+
+  <div class="center">
+    <img [src]="photoPerfil" for="producto_img" class="aggImg" >
+    <label for="producto_img" class="selectImg" ><mat-icon class="icons">add_a_photo</mat-icon></label>
+  </div><br>
+  <input class="ng-hide" style="display: none;" id="producto_img" type="file" accept="image/*" (input)="changePhoto(imageInput)" #imageInput/>
+
+
+  <mat-grid-list [cols]="columns" rowHeight="100px">
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombres</mat-label>
+        <input matInput [(ngModel)]="nombres" autocomplete="off" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Apellidos</mat-label>
+        <input matInput [(ngModel)]="apellidos" autocomplete="off" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Numero de Identificación</mat-label>
+        <input matInput [(ngModel)]="identificacion" autocomplete="off" type="number">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="email" autocomplete="off" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [(ngModel)]="password" autocomplete="off" [type]="typePass">
+        <mat-icon matSuffix id="iconVisibility" (click)="passVisible(1)">visibility</mat-icon>
+        <mat-icon matSuffix id="iconVisibilityOff" style="display: none;" (click)="passVisible(2)">visibility_off</mat-icon>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Verifique su Contraseña</mat-label>
+        <input matInput [(ngModel)]="varifyPassord" autocomplete="off" [type]="typePass1">
+        <mat-icon matSuffix id="iconVisibility1" (click)="passVisible(3)">visibility</mat-icon>
+        <mat-icon matSuffix id="iconVisibilityOff1" style="display: none;" (click)="passVisible(4)">visibility_off</mat-icon>
+      </mat-form-field>
+    </mat-grid-tile>
+  
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Numero de Telefono</mat-label>
+        <input matInput [(ngModel)]="telefono" autocomplete="off" type="number" >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline" (click)="picker.open()">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" autocomplete="off" [(ngModel)]="nacimiento">
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" *ngIf="validateUrl != 2">
+      <mat-form-field appearance="outline">
+        <mat-label>Roles</mat-label>
+        <mat-select [(ngModel)]="rol" [readonly]="readonlyInputs"  >
+          <mat-option *ngFor="let item of listRoles" [value]="item.rol_id" [disabled]="readonlyInputs">{{item.rol_descripcion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Dirección de residencia</mat-label>
+        <input matInput [(ngModel)]="direccion" autocomplete="off" type="text">
+        <mat-hint>Esta Información debe ser veridica</mat-hint>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Ciudad</mat-label>
+        <input matInput [(ngModel)]="ciudad" autocomplete="off" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Departamento</mat-label>
+        <input matInput [(ngModel)]="departamento" autocomplete="off" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div class="buttonsForms">
+    <button [disabled]="disableButton"  mat-raised-button color="primary" class="buttons" style="margin-left: 30px;" (click)="guardar()">
+      <mat-icon  style="margin-right: 10px;">save</mat-icon>{{titleButton}}
+    </button>
+  </div><br>
+</div>
+
+<div class="content-v2" *ngIf="currentTab == 2">
+
+  <div *ngIf="validateUrl == 3 && length > 0">
+    <div style="width: 95%; margin-left: 40px;">
+      <app-my-table
+        [(datasource)]="dataSource"
+        [(columns)]="columnas"
+        [(length)]="length"
+        paginator="true"
+        search="true"
+        [(pagesize)]="pageSize"
+        [(pagesizeoptions)]="pageSizeOptions"
+        (changePaginator)="changePaginator($event, 1)"
+        (changeSort)="changeSort($event, 1)"
+        (downloadItems)="downloadPDF($event)"
+      ></app-my-table>
+    </div>
+  </div>
+</div>
+
+<div class="content-v2" *ngIf="currentTab == 3">
+  <div *ngIf="validateUrl == 3 && length2 > 0">
+    <div style="width: 95%; margin-left: 40px;">
+      <app-my-table
+        [(datasource)]="dataSource2"
+        [(columns)]="columnas2"
+        [(length)]="length2"
+        paginator="true"
+        search="true"
+        [(pagesize)]="pageSize2"
+        [(pagesizeoptions)]="pageSizeOptions"
+        (changePaginator)="changePaginator($event, 2)"
+        (changeSort)="changeSort($event, 2)"
+      ></app-my-table>
+    </div>
+  </div>
+</div>
+
+<div class="content-v2" *ngIf="currentTab == 4"><br>
+
+  <mat-slide-toggle [(ngModel)]="darkMode" [checked]="darkMode">Modo Oscuro</mat-slide-toggle>
+ 
+<br><br><br>
+  <div class="buttonsForms">
+    <button mat-raised-button color="primary" class="buttons" style="margin-left: 30px;" (click)="saveSettings()">
+      <mat-icon  style="margin-right: 10px;">settings</mat-icon>Guardar
+    </button>
+  </div>
+</div>
+

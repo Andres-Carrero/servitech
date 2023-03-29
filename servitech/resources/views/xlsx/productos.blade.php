@@ -1,0 +1,25 @@
+<table>
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Iva</th>
+            <th>Linea</th>
+            <th>Tipo</th>
+            <th>Ubicacion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+

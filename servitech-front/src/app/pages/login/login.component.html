@@ -1,0 +1,34 @@
+
+<div class="center">
+  <div class="login"><br>
+    <p class="titleLogin">Iniciar Sesión</p>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" autocomplete="off" [(ngModel)]="email" type="text">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Contraseña</mat-label>
+      <input matInput placeholder="Contraseña" autocomplete="off" [(ngModel)]="pass" [type]="typePass">
+      <mat-icon matSuffix id="iconVisibility" (click)="passVisible(1)">visibility</mat-icon>
+      <mat-icon matSuffix id="iconVisibilityOff" style="display: none;" (click)="passVisible(2)">visibility_off</mat-icon>
+      <mat-hint><a href="/ForgetPass" class="textsLogin">¿Olvidaste tu Contraseña?</a></mat-hint>
+    </mat-form-field><br><br>
+  
+    <div class="center">
+      <div>
+        <button  mat-raised-button color="primary" class="buttons" (click)="login()">
+          <span class="material-icons" style="margin-right: 10px;">login</span>Ingresar
+        </button>
+      </div>
+    </div>
+    <div style="text-align: center;">
+      <a href="/registrarse" class="textsLogin" style="font-size: 12px;">¿No estas registrado?</a>
+    </div>
+  
+  
+  
+  
+  </div>
+</div>

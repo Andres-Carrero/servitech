@@ -1,0 +1,46 @@
+<div class="content-v2">
+  <h1 style="text-align: center;">Consultar Ubicacion</h1>
+
+
+  <mat-grid-list cols="4" rowHeight="75px" >
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Codigo</mat-label>
+        <input matInput autocomplete="off" type="number" [(ngModel)]="codigo">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput autocomplete="off" type="text" [(ngModel)]="descripcion">
+      </mat-form-field>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+  <div class="center">
+    <button mat-raised-button color="primary" class="buttonSearch" (click)="obtenerubicacion()">
+      <mat-icon  style="margin-right: 10px;">search</mat-icon>Consultar
+    </button>
+  </div>
+
+  <app-my-table
+    [(datasource)]="dataSource"
+    [(columns)]="columns"
+    [(length)]="length"
+    paginator="true"
+    search="true"
+    [(pagesize)]="pageSize"
+    [(pagesizeoptions)]="pageSizeOptions"
+    (changePaginator)="changePaginator($event)"
+    (changeSort)="changeSort($event)"
+  ></app-my-table>
+
+  <div class="buttonsForms">
+    <a mat-raised-button color="primary" class="buttons" href="/ubicacion/create">
+      <mat-icon  style="margin-right: 10px;">add</mat-icon>Agregar Ubicacion
+    </a>
+  </div>
+
+</div>

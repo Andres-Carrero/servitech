@@ -1,0 +1,85 @@
+.navbar{
+    margin-top: -8px;
+	height: 56px;
+	left: 0;
+    margin-left: -1%;
+	line-height: 55px;
+	width: 100%;
+    font-size: 18px;
+    width: 101.5%;
+}
+
+
+
+.title{
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.navs{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.nav{
+    margin-top: -55px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-right: 15px;
+}
+
+.selecNavUp{
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+.iconsNav{
+    margin-top: 10px;
+    margin-right: 10px;    
+}
+
+.selecNavSub{
+    text-decoration: none;
+    margin-left: 15px;
+    margin-right: 25px;
+    font-size: 18px;
+}
+
+.subMenu{
+    position: fixed;
+    z-index: 9999;
+    border-radius: 10px;
+    border: 1px solid;
+    background-color: inherit;
+}
+
+.navsSub{
+    line-height: 2;
+}
+
+.navsUp{
+    background-color: #E44C65;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 35px;
+    padding-left: 20px;
+    padding-right: 20px; 
+}
+
+.selecNav{
+    color: #ffffff;
+    text-decoration: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+
+
+/*.nav{
+
+}*/

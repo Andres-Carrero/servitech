@@ -1,0 +1,84 @@
+table {
+  margin-top: 2%;
+  width: 100%;
+}
+  
+  .filter-content {
+    width: 100%;
+    text-align: left;
+    position: absolute;
+    width: 300px;
+    right: 0;
+    margin-right: 40px;
+  }
+  .filter {
+    width: 100%;
+    text-align: right;
+    position: absolute;
+  }
+  
+  .actions {
+    float: right;
+    //color: rgba(0,50,110,1);
+    color: #3f51b5;
+  }
+  
+  .example-loading-shade {
+    position: absolute;
+    top: 165px;
+    left: 0;
+    bottom: 122px;
+    width: 90%;
+    right: 0;
+    margin-left: 5%;
+    right: 0;
+    background: rgba(0, 0, 0, 0.01);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  :host ::ng-deep .mat-progress-spinner circle,
+  .mat-spinner circle {
+    stroke: #043c33;
+  }
+  .icons {
+    text-align: center;
+    align-items: center;
+  }
+  .link {
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  .color-danger {
+    color: red;
+  }
+  
+  .color-success {
+    color: green;
+  }
+  
+  .color-warning {
+    color: orange;
+  }
+  
+  .tableBody{
+    margin-bottom: 2%;
+  }
+  
+  p{
+    padding: 7px !important;
+  }
+
+  td{
+    font-family: roboto, Helvetica, sans-serif;
+    font-size: 15px;
+  }
+
+  th{
+    font-family: roboto, Helvetica, sans-serif;
+    font-size: 15px;
+  }
+  
+  

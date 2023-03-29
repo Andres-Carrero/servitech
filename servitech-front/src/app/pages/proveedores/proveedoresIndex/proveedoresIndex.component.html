@@ -1,0 +1,54 @@
+<div class="content-v2">
+
+  <h1 style="text-align: center;">Consultar Proveedores</h1>
+
+  <mat-grid-list cols="5" rowHeight="75px">
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Codigo</mat-label>
+        <input matInput autocomplete="off" type="number" [(ngModel)]="codigo">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre Proveedor</mat-label>
+        <input matInput autocomplete="off" type="text" [(ngModel)]="nombre">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput autocomplete="off" type="text" [(ngModel)]="email">
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+  <div class="center">
+    <button mat-raised-button color="primary" class="buttonSearch" (click)="obtenerproveedores()">
+      <mat-icon  style="margin-right: 10px;">search</mat-icon>Consultar
+    </button>
+  </div>
+
+  <app-my-table
+    [(datasource)]="dataSource"
+    [(columns)]="columns"
+    [(length)]="length"
+    paginator="true"
+    search="true"
+    [(pagesize)]="pageSize"
+    [(pagesizeoptions)]="pageSizeOptions"
+    (changePaginator)="changePaginator($event)"
+    (changeSort)="changeSort($event)"
+  ></app-my-table>
+
+   
+  <div class="buttonsForms">
+    <a mat-raised-button color="primary" class="buttons" href="/proveedores/create">
+      <mat-icon  style="margin-right: 10px;">add</mat-icon>Agregar Proveedores
+    </a>
+  </div>
+
+</div>
+

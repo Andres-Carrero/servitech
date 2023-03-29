@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
+.light-theme{
+    background-color: #ffffff !important;
+    font-family: roboto, Helvetica, sans-serif;
+    color: #000000;
+    background: #ffffff;
+    font-weight: 500;
+    caret-color: #000000;
+    .mat-form-field-label {color: #000000}
+    .mat-form-field-label {color: #000000}
+    .mat-form-field.mat-focused .mat-form-field-label {color: #0026ff}
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick {color: #000000}
+    .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {color: #0026ff}
+    .mat-form-field-appearance-outline .mat-form-field-outline {color: #3f51b5}
+    .tab-active{border: 2px solid #3f51b5}
+    .tab-option{border-bottom: 2px solid #3f51b5}
+    input::placeholder{color: #000000 !important}
+    .inputs{background-color: transparent; color: #000000;}
+    .mat-select-value {color: #000000}
+    ::-webkit-scrollbar-track { background: #ffffff}
+    .selecNavSub{color: #000000}
+    .subMenu{background-color: #ffffff !important}
+    .tableVentas{border-color: #3f51b5 !important}
+    .borders{border: 1px solid #000000 }
+    mat-paginator{color: #000000 !important}
+    mat-card{
+        background-color: #ffffff;
+        color: #000000;
+    }
+    mat-hint{color: #000000}
+    mat-form-field{
+        width: 100%;
+        color: #000000;
+    }
+    .icons{
+        color: #000000
+    }
+    .snackbar {
+        background-color: #ffffff;
+        border: 1px solid #1c1d26;
+        font-size: 20px;
+        font-weight: 500;
+        color: #000000;
+    }
+    .imageHome{
+        background-color: #1c1d26;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+    }
+    .textsLogin{
+        text-decoration: none;
+        color: #000000;
+        font-size: 10px;
+    }
+    .tableHead{
+        background-color: #3f51b5 !important;
+        color:#ffffff;
+    }
+    .tableBody{
+        background-color: #ffffff;
+        font-weight: 500;
+        color:#000000;
+    }
+    mat-dialog-content{
+        background-color: #ffffff;
+        .headerModal{
+            background-color: #3f51b5 !important;
+            color: #ffffff;
+        }
+        .bodyModal{
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 350;
+        }
+        .listTitle{
+            border-bottom: 1px solid #000000;
+        }
+        .listOne{
+            border: 1px solid #000000;
+        }
+    }
+}
+
+.dark-theme{
+    background-color: #303036 !important;
+    font-family: roboto, Helvetica, sans-serif;
+    color: #ffffff;
+    background: #1c1d26;
+    font-weight: 500;
+    caret-color: #ffffff;
+    .mat-form-field-label {color: #ffffff}
+    .mat-form-field-label {color: #ffffff}
+    .mat-form-field.mat-focused .mat-form-field-label {color: #ffffff;}
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick {color: #ffffff}
+    .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {color: #ffffff}
+    .mat-form-field-appearance-outline .mat-form-field-outline {color: #ffffff}
+    .tab-active{border: 2px solid #3f51b5}
+    .tab-option{border-bottom: 2px solid #3f51b5}
+    input::placeholder{color: #ffffff !important}
+    .inputs{background-color: transparent; color: #ffffff;}
+    .mat-select-value {color: #ffffff}
+    ::-webkit-scrollbar-track { background: #303036}
+    .selecNavSub{color:#ffffff}
+    .subMenu{background-color: #303036 !important}
+    .tableVentas{border-color: #ffffff !important}
+    .borders{border: 1px solid #ffffff }
+    mat-paginator{color: #ffffff !important}
+    mat-hint{color: #ffffff}
+    mat-card{
+        background-color: #1c1d26;
+        color: #ffffff;
+    }
+    mat-form-field{
+        width: 100%;
+        color: #ffffff;
+    }
+    .icons{
+        color: #ffffff
+    }
+    .snackbar {
+        background-color: #1c1d26;
+        border: 1px solid #ffffff;
+        font-size: 20px;
+        font-weight: 500;
+        color: #ffffff;
+    }
+    .imageHome{
+        background-image: url(/assets/img/overlay.png);
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+    }
+    .textsLogin{
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 10px;
+    }
+    .tableHead{
+        background-color: #1c1d26 !important;
+        color:#ffffff;
+    }
+    .tableBody{
+        background-color: #1c1d26;
+        font-weight: 250;
+        color:#ffffff;
+    }
+    mat-dialog-content{
+        background-color: #303036;
+        .headerModal{
+            background-color: #1c1d26 !important;
+            color: #ffffff;
+        }
+        .bodyModal{
+            background-color: #303036;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .listTitle{
+            border-bottom: 1px solid #ffffff;
+        }
+        .listOne{
+            border: 1px solid #ffffff;
+        }
+        
+    }
+
+}
+
+html, body { height: 100%; }
+
+.buttonTemplate{
+    color: #ffffff;
+}
+
+.tables{
+    margin: 2%;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #0026ff !important;
+}
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: #3f51b5 !important;
+}
+
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tableHeaders{
+    width: auto; 
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.left{
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px
+}
+  
+::-webkit-scrollbar-thumb {
+    background: #1c1d26;
+    border-radius: 20px;
+}
+
+.mat-input-element {
+    caret-color: inherit;
+}
+
+.content{
+    width: 100%;
+}
+
+.content-v2{
+    margin-top: 1%;
+    margin-left: 3%;
+    margin-right: 3%;
+    padding-bottom: 3%;
+}
+
+.buttonsForms{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+
+
+
+
+
+
+  
+
+  
+ 
+  
+

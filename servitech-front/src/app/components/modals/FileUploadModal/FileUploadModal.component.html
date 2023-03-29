@@ -1,0 +1,85 @@
+<mat-dialog-content>
+  <div class="headerModal" >
+    <h2>{{data.title}}</h2>
+  </div>
+
+  <div class="bodyModal">
+    <div class="center">
+      <button mat-raised-button color="primary" class="buttonTemplate" (click)="downloadFormats()">
+        <mat-icon style="margin-right: 10px;">file_download</mat-icon> Descargar Plantilla
+      </button>
+      <button mat-raised-button color="primary"  class="buttonTemplate" style="margin-left: 3%;">
+        <mat-icon style="margin-right: 10px;">file_upload</mat-icon>
+        <label  for="producto_img">Seleccionar Archivo</label>
+      </button>
+    </div><br>
+  
+    <div *ngIf="data.notes.length > 0" >
+      <h3 >Notas</h3>
+      <div *ngFor="let item of data.notes" style="text-align: justify;">
+        {{item.number}}: {{item.msg}}
+      </div>
+    </div><br>
+  
+    
+  
+  </div>
+</mat-dialog-content>
+
+<input 
+  class="ng-hide" 
+  style="display: none;" 
+  id="producto_img" 
+  type="file" 
+  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" 
+  (input)="updateExcel($event.target.files)" 
+/>
+
+
+<!--<div class="headerModal"  mat-dialog-title>
+  <h2>{{data.title}}</h2>
+</div>
+
+
+
+
+
+<div class="bodyModal">
+  <div class="lists">
+    <div class="listOne" *ngIf="dataList1.length > 0"> 
+      <div class="listTitle">{{dataListTitle1}}</div>
+      <ul class="scrolling">
+        <li *ngFor="let item of dataList1">{{item.id}} - {{item.value}}</li>
+      </ul>
+    </div>
+
+    <div class="listOne" *ngIf="dataList2.length > 0"> 
+      <div class="listTitle">{{dataListTitle2}}</div>
+      <ul class="scrolling">
+        <li *ngFor="let item of dataList2">{{item.id}} - {{item.value}}</li>
+      </ul>
+    </div>
+
+    <div class="listOne" *ngIf="dataList3.length > 0"> 
+      <div class="listTitle">{{dataListTitle3}}</div>
+      <ul class="scrolling">
+        <li *ngFor="let item of dataList3">{{item.id}} - {{item.value}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="data.notes.length > 0" style="text-align: center;">
+    <div style="font-weight: 500;">Notas</div>
+    <div *ngFor="let item of data.notes" style="text-align: justify;">
+      {{item.number}}: {{item.msg}}
+    </div>
+  </div><br>
+
+  <div>
+    <button  mat-button color="primary" class="buttons buttonTemplate" (click)="downloadFormats()">
+      <mat-icon  style="margin-right: 10px;">file_download</mat-icon>Descargar Plantilla
+    </button>
+
+  </div>
+
+</div>-->

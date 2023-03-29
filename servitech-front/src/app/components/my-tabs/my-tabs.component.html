@@ -1,0 +1,23 @@
+<mat-grid-list [cols]="optionsTabs.length" rowHeight="50px">
+
+  <div *ngFor="let option of optionsTabs; let i = index" >
+    <mat-grid-tile 
+      *ngIf="option.show"
+      
+      [colspan]="1" 
+      class="tab-option"  
+      (click)="onGetTabActive(i)" 
+      [ngClass]="{'tab-active': option.active, 'opacity': option.disabled}"
+    >{{option.name}}</mat-grid-tile>
+  </div>
+  
+
+  
+
+ 
+</mat-grid-list>
+
+
+<!--<div class="tab-group">
+  <div class="tab-option" *ngFor="let option of optionsTabs" (click)="onActiveTab(option)" [ngClass]="{'tab-active': option.active}">{{option.name}}</div>
+</div>-->

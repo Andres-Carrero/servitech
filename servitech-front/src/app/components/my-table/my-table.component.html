@@ -1,0 +1,196 @@
+
+
+<div class="example-loading-shade" *ngIf="isLoadingResults">
+  <mat-spinner color="primary" diameter="40"></mat-spinner>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="datasource" matSort (matSortChange)="sortData($event)">
+    <ng-container *ngFor="let column of columns; let i = index" [cdkColumnDef]="column.columnDef">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        [disabled]="!column.sort"
+        [ngStyle]="{ width: column.width }"
+        class="tableHead"
+      >
+        {{ column.header }}
+      </th>
+
+      <td mat-cell *matCellDef="let row"
+      class="tableBody">
+        <a *ngIf="row.url" [routerLink]="[row.urlName, row.uuid]" class="link">
+          <p *ngIf="column.type == 'text' && row.class" [class]="row.class[i]">
+            {{ column.cell(row) }}
+          </p>
+
+          <p *ngIf="column.type == 'text' && !row.class">
+            {{ column.cell(row) }}
+          </p>
+        </a>
+        <p
+          *ngIf="column.type == 'text' && !row.url && row.class"
+          [class]="row.class[i]"
+        >
+          {{ column.cell(row) }}
+        </p>
+
+        <p *ngIf="column.type == 'text' && !row.url && !row.class">
+          {{ column.cell(row) }}
+        </p>
+
+        <mat-checkbox
+          *ngIf="column.type == 'check'"
+          (click)="$event.stopPropagation()"
+          (change)="$event ? eventCheck(row) : null"
+          color="primary"
+        >
+        </mat-checkbox>
+
+        <div
+          class="icons-not-event"
+          *ngIf="column.type == 'icons'"
+          [class]="row.class[i]"
+        >
+          <mat-icon class="mat-18">{{ column.cell(row) }}</mat-icon>
+        </div>
+        <div class="icons" *ngIf="column.type == 'icon'">
+          <button
+            class="actions"
+            *ngIf="row.icons.delete"
+            mat-icon-button
+            color="accent"
+            (click)="deleteItem(row)"
+          >
+            <mat-icon class="mat-18">delete</mat-icon>
+          </button>
+          <button
+            class="actions"
+            *ngIf="row.icons.edit"
+            mat-icon-button
+            color="accent"
+            (click)="editItem(row)"
+          >
+            <mat-icon class="mat-18">edit</mat-icon>
+          </button>
+          <button
+          class="actions"
+          *ngIf="row.icons.visibility"
+          mat-icon-button
+          color="accent"
+          (click)="visibilityReviewItem(row)"
+        >
+          <mat-icon class="mat-18">visibility</mat-icon>
+        </button>
+          <button
+            class="actions"
+            *ngIf="row.icons.add"
+            mat-icon-button
+            color="accent"
+            (click)="addItem(row)"
+          >
+            <mat-icon class="mat-18">add</mat-icon>
+          </button>
+          <button
+            class="actions"
+            *ngIf="row.icons.historial"
+            mat-icon-button
+            color="accent"
+            (click)="historialItem(row)"
+          >
+            <mat-icon class="mat-18">history</mat-icon>
+          </button>
+          <button
+            class="actions"
+            *ngIf="row.icons.download"
+            mat-icon-button
+            color="accent"
+            (click)="downloadItem(row)"
+          >
+            <mat-icon class="mat-18">save_alt</mat-icon>
+          </button>
+          <button
+            class="actions"
+            *ngIf="row.icons.addUser"
+            mat-icon-button
+            color="accent"
+            (click)="userItem(row)"
+          >
+            <mat-icon class="mat-18">person_add</mat-icon>
+          </button>
+          <button
+            class="actions"
+            *ngIf="row.icons.results"
+            mat-icon-button
+            color="accent"
+            (click)="resultsItem(row)"
+          >
+            <mat-icon class="mat-18">check_circle</mat-icon>
+          </button>
+          <button
+            class="actions"
+            *ngIf="row.icons.resultsok"
+            mat-icon-button
+            color="accent"
+            (click)="resultsokItem(row)"
+          >
+            <mat-icon class="mat-18">book</mat-icon>
+          </button>
+          <button
+            class="actions"
+            *ngIf="row.icons.view"
+            mat-icon-button
+            color="accent"
+            (click)="viewItem(row)"
+          >
+            <mat-icon class="mat-18">visibility</mat-icon>
+          </button>
+          <button
+            class="actions"
+            *ngIf="row.icons.createMaintenance"
+            mat-icon-button
+            color="accent"
+            title="Crear mantenimiento"
+            (click)="createMaintenanceItem(row)"
+          >
+            <mat-icon class="mat-18">build</mat-icon>
+          </button>
+          <button
+          class="actions"
+          *ngIf="row.icons.input"
+          mat-icon-button
+          color="accent"
+          (click)="inputInternalItem(row)"
+        >
+          <mat-icon class="mat-18" style="color: rgb(55, 233, 70);">call_made</mat-icon>
+        </button>
+        <button
+        class="actions"
+        *ngIf="row.icons.output"
+        mat-icon-button
+        color="accent"
+        (click)="outputInternalItem(row)"
+      >
+        <mat-icon class="mat-18" style="color: red;">call_received</mat-icon>
+      </button>
+
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div *ngIf="paginator == 'true'">
+    <mat-paginator 
+      class="tableBody"
+      [length]="length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageEvent($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>

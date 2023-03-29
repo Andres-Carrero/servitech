@@ -1,0 +1,137 @@
+<app-my-tabs 
+  [(optionsTabs)]="optionsTabs" 
+  [(intialTabCode)]="initialTab"
+  (getTabActive)="currentTab = $event.code"
+  (filterShow)="optionsTabs"
+></app-my-tabs>
+
+<div class="content-v2" *ngIf="currentTab == 1">
+  <mat-grid-list cols="3" rowHeight="75px">
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Codigo</mat-label>
+        <input matInput [(ngModel)]="codigo" autocomplete="off" type="number" [readonly]="readonly">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="nombre" autocomplete="off" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Marca</mat-label>
+        <input matInput [(ngModel)]="marca" autocomplete="off" type="text">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Iva (%)</mat-label>
+        <input matInput [(ngModel)]="iva" autocomplete="off" type="number">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" *ngIf="readonly">
+      <mat-form-field appearance="outline">
+        <mat-label>Cantidad</mat-label>
+        <input matInput [(ngModel)]="cantidad" autocomplete="off" type="number" [readonly]="readonly">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" *ngIf="readonly">
+      <mat-form-field appearance="outline">
+        <mat-label>Precio Unitario de venta</mat-label>
+        <input matInput [(ngModel)]="precio" autocomplete="off" type="text" [readonly]="readonly">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Linea</mat-label>
+        <mat-select [(ngModel)]="linea">
+          <mat-option *ngFor="let item of listLineas" [value]="item.id">{{item.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <mat-select [(ngModel)]="tipo">
+          <mat-option *ngFor="let item of listTipos" [value]="item.tipr_id">{{item.tipr_descripcion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Ubicacion</mat-label>
+        <mat-select [(ngModel)]="ubicacion">
+          <mat-option *ngFor="let item of listUbicaciones" [value]="item.ubi_id">{{item.ubi_descripcion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+
+<div class="content-v2" *ngIf="currentTab == 2">
+  <mat-grid-list cols="9" rowHeight="165px">
+    <mat-grid-tile [colspan]="1" *ngFor="let item of listPhotos; let i = index">
+      <img [src]="item.img" *ngIf="item.img != ''" alt="" style="height: 145px; width: 145px;">
+      <mat-icon class="deleteImg" (click)="deleteArrayImg(i, item)">close</mat-icon>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" >
+      <label for="producto_img" *ngIf="ocultCamera" class="aggImg" ><mat-icon>add_a_photo</mat-icon></label>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <input class="ng-hide" style="display: none;" id="producto_img" type="file" accept="image/*" (input)="addImg(imageInput)" #imageInput/>
+</div>
+
+
+<div class="content-v2" *ngIf="currentTab == 3">
+  <div *ngFor="let item of listEspecificacion; let i = index">
+    <mat-grid-list cols="3" rowHeight="75px">
+      <mat-label>{{i+1}}</mat-label>
+      <mat-grid-tile [colspan]="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Titulo</mat-label>
+          <input matInput [(ngModel)]="item.title" (input)="changeButton()" autocomplete="off" type="text" [readonly]="item.sync == 'SI'">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Descripción</mat-label>
+          <input matInput [(ngModel)]="item.descripcion" (input)="changeButton()" autocomplete="off" type="text" [readonly]="item.sync == 'SI'">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Nivel de Importancia</mat-label>
+          <mat-select [(ngModel)]="item.importancia">
+            <mat-option *ngFor="let options of listImporancia" [value]="options.id" [disabled]="item.sync == 'SI'">{{options.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-icon class="deleteEspe" (click)="deleteEspe(i, item)">close</mat-icon>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <button mat-raised-button color="primary" class="buttons addEspe"  (click)="newEspecificacion()" [disabled]="ocult">
+    <mat-icon style="margin-right: 10px;">add</mat-icon>  Agregar Nueva Especifición
+  </button>
+
+</div>
+
+<div class="content-v2 buttonsForms" >
+  <button  mat-raised-button color="primary" class="buttons" (click)="savedProductos()">
+    <mat-icon  style="margin-right: 10px;">save</mat-icon>{{titleButton}}
+  </button>
+</div><br>
+
+

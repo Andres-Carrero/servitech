@@ -1,0 +1,49 @@
+<div class="content"><br>
+  <h1 style="text-align: center;">Verificación de usuario</h1><br>
+
+
+  <div class="login"><br>
+    <p style="text-align: center;">Digite su codigo</p>
+  
+    <mat-form-field appearance="outline" style="margin-right: 6%;">
+      <input matInput id="input1" placeholder="N1" (keyup)="validateNumbers(1)" [(ngModel)]="num1" autocomplete="off" class="inputs" type="text" maxlength="1">
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline" style="margin-right: 6%;">
+      <input matInput id="input2" placeholder="N2" (keyup)="validateNumbers(2)" [(ngModel)]="num2" autocomplete="off" class="inputs" type="text" maxlength="1">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin-right: 6%;">
+      <input matInput id="input3" placeholder="N3" (keyup)="validateNumbers(3)" [(ngModel)]="num3" autocomplete="off" class="inputs" type="text" maxlength="1">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin-right: 6%;">
+      <input matInput id="input4" placeholder="N4" (keyup)="validateNumbers(4)" [(ngModel)]="num4" autocomplete="off" class="inputs" type="text" maxlength="1">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="margin-right: 6%;">
+      <input matInput id="input5" placeholder="N5" (keyup)="validateNumbers(5)" [(ngModel)]="num5" autocomplete="off" class="inputs" type="text" maxlength="1">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <input matInput id="input6" placeholder="N6" (keyup)="validateNumbers(6)" [(ngModel)]="num6" autocomplete="off" class="inputs" type="text" maxlength="1">
+    </mat-form-field>
+
+    <br><br>
+  
+    <div style="text-align: center;">
+      <button  mat-raised-button color="primary" class="buttons" (click)="saveVerify()">
+        <span class="material-icons" style="margin-right: 10px;">security</span>Verificar
+      </button>
+      
+  
+    </div>
+   
+  
+  
+  
+  
+  </div>
+  
+    
+  </div>

@@ -1,0 +1,66 @@
+
+<div class="content" *ngIf="this.rol == 2">
+
+  <div class="scrolling" *ngIf="listTipo.length > 1" >
+    <mat-grid-list [cols]="listTipo.length" rowHeight="100px" >
+      <mat-grid-tile [colspan]="1" *ngFor="let item of listTipo" (click)="selectTipo(item)" [ngClass]="{'active': item.active}">
+     
+        <div class="estilo">
+          <mat-label >{{item.tipr_descripcion}}</mat-label>
+        </div>
+      
+        <div>
+          <mat-icon *ngIf="item.class == 1" style="margin-top: -50%; margin-left: -30%;font-size: 40px;">{{item.icon}}</mat-icon>
+          <i [ngClass]="item.icon" *ngIf="item.class == 2"  style="margin-top: -50%; font-size: 40px;"></i>
+        </div>
+        
+    </mat-grid-tile>
+  </mat-grid-list>
+</div><br><br>
+
+  <div class="center" *ngFor="let item of listProductos" >
+    <mat-card class="cards" style="padding: 25px;">
+      <img [src]="item.img" alt="" class="img" *ngIf="item.especificaciones.length > 0">      
+      <img src="https://i.imgur.com/ALENuQd.png" alt="" class="img" *ngIf="item.especificaciones.length == 0" style="height:150px; margin-top: -1%;">      
+      <mat-card-title>{{item.prod_marca}} - {{item.prod_nombre}}</mat-card-title><br>
+
+      <mat-card-content *ngIf="item.especificaciones.length > 0">
+        <div >Especificaciones</div>
+          <table style="width: 80%;">
+            <ul *ngFor="let espe of item.especificaciones" >
+              <li style="display: flex; line-height: 2; margin-top: -12px; border-top: 1px solid;" > 
+                <div style="width: 45%; padding-left: 1%;" ><b>{{espe.esp_titulo}}:</b></div>
+                <div style="width: 5%;"></div>
+                <div style="width: 45%;">{{espe.esp_descripcion}}</div>
+              </li>
+            </ul>
+          </table>
+      </mat-card-content>
+     
+      <div *ngIf="item.especificaciones.length > 0">
+        <button  mat-raised-button color="primary" class="buttons" style="float: right;" (click)="newBuy(item)" [disabled]="item.carrito">
+          <mat-icon  style="margin-right: 10px;">shopping_cart</mat-icon>Agregar al Carro
+        </button>
+        <button disabled mat-stroked-button color="primary" class="buttons" style="float: right; margin-right: 30px; " (click)="verdetalle(item)">
+          <mat-icon  style="margin-right: 10px;">visibility</mat-icon>Ver Detalles
+        </button>
+      </div>
+      <div *ngIf="item.especificaciones.length == 0" style="margin-top: 50px;">
+        <button  mat-raised-button color="primary" class="buttons" style="float: right;" (click)="newBuy(item)" [disabled]="item.carrito">
+          <mat-icon  style="margin-right: 10px;">shopping_cart</mat-icon>Agregar al Carro
+        </button>
+        <button disabled mat-stroked-button color="primary" class="buttons" style="float: right; margin-right: 30px; " (click)="verdetalle(item)">
+          <mat-icon  style="margin-right: 10px;">visibility</mat-icon>Ver Detalles
+        </button>
+      </div>
+      
+      
+    </mat-card>
+  </div>
+
+  <div class="center" *ngIf="listProductos.length == 0">
+    No hay productos en esta categoria
+  </div>
+
+</div>
+

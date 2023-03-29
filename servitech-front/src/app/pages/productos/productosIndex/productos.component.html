@@ -1,0 +1,79 @@
+<div class="content-v2">
+  <h1 style="text-align: center;">Consultar Productos</h1>
+
+  <mat-grid-list cols="5" rowHeight="75px">
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Codigo</mat-label>
+        <input matInput autocomplete="off" type="text" [(ngModel)]="codigo">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Descripcion </mat-label>
+        <input matInput autocomplete="off" type="text" [(ngModel)]="desc">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Marca</mat-label>
+        <input matInput autocomplete="off" type="text" [(ngModel)]="marca">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <mat-select [(ngModel)]="tipo">
+          <mat-option *ngFor="let item of listTipos" [value]="item.tipr_id">{{item.tipr_descripcion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Ubicacion</mat-label>
+        <mat-select [(ngModel)]="ubicacion">
+          <mat-option *ngFor="let item of listUbicaciones" [value]="item.ubi_id">{{item.ubi_descripcion}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+  <div class="center">
+    <button mat-raised-button color="primary" (click)="obtenerproductos()">
+      <mat-icon  style="margin-right: 10px;">search</mat-icon>Consultar
+    </button>
+  </div>
+
+
+
+    <app-my-table
+    [(datasource)]="dataSource"
+    [(columns)]="columns"
+    [(length)]="length"
+    paginator="true"
+    search="true"
+    [(pagesize)]="pageSize"
+    [(pagesizeoptions)]="pageSizeOptions"
+    (changePaginator)="changePaginator($event)"
+    (changeSort)="changeSort($event)"
+    (deleteItems)="deleteItems($event)"
+    (editItems)="editItems($event)"
+  ></app-my-table>
+
+   
+  <div class="buttonsForms">
+    <a mat-raised-button color="primary" class="buttons" href="/productos/create">
+      <mat-icon  style="margin-right: 10px;">add</mat-icon>Agregar Productos
+    </a>
+    <button  mat-raised-button color="primary" class="buttons" style="margin-left: 30px;" (click)="openModalFiles()">
+      <mat-icon  style="margin-right: 10px;">post_add</mat-icon>Agregar Masivamente
+    </button>
+  </div>
+</div>
+
+

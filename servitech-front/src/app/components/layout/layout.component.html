@@ -1,0 +1,96 @@
+
+
+
+<div class="navbar">
+    <div class="title">
+        <a class="selecNav selecNavUp">{{name}}</a>
+    </div>
+
+    
+    <div class="nav" *ngIf="!token">
+        <div class="navs">
+            <a class="selecNav" href="/">Inicio</a>
+        </div>
+        <div class="navs">
+            <a class="selecNav" href="/about">Sobre Nosotros</a>
+        </div>
+        <div class="navsUp">
+            <a class="selecNavUp" href="/login">Sing Up</a>
+        </div>
+    </div>
+
+    <div *ngIf="verify">
+        <div class="nav" *ngIf="token != null && role == '1'">
+            <div class="navs">
+                <a class="selecNav" (click)="openOptions(1)">Administración</a>
+                <div class="subMenu" *ngIf="adminOptions">
+                    <div class="navsSub"  (click)="routers(1, '/usuarios')">
+                        <a class="selecNavSub">Usuarios</a>
+                    </div>
+                    <div class="navsSub" (click)="routers(1, '/productos')">
+                        <a class="selecNavSub">Productos</a>
+                    </div>
+                    <div class="navsSub" (click)="routers(1, '/ubicacion')">
+                        <a class="selecNavSub">Ubicaciones</a>
+                    </div>
+                    <div class="navsSub" (click)="routers(1, '/proveedores')">
+                        <a class="selecNavSub">Proveedores</a>
+                    </div>
+                </div>
+            </div>
+            <div class="navs">
+                <a class="selecNav" (click)="openOptions(2)">Movimientos</a>
+                <div class="subMenu" *ngIf="movOptions">
+                    <div class="navsSub" (click)="routers(2, '/movimientos/compras')">
+                        <a class="selecNavSub">Nueva Compra</a>
+                    </div>
+                    <div class="navsSub" (click)="routers(2, '/movimientos/ventas')"> 
+                        <a class="selecNavSub">Nueva Venta</a>
+                    </div>
+                </div>
+            </div>
+            <div class="navs">
+                <a class="selecNav" (click)="routers(3, '/miperfil')">Mi Perfil</a>
+                <!--<div class="subMenu" *ngIf="movPerfil">
+                    <div class="navsSub" (click)="routers(3, '/miperfil')">
+                        <a class="selecNavSub">Mi Perfil</a>
+                    </div>
+                    <div class="navsSub" (click)="routers(3, '/configuracion')">
+                        <a class="selecNavSub">Configuración</a>
+                    </div>
+                </div>-->
+            </div>
+            <div class="navsUp">
+                <a class="selecNavUp SignUp" (click)="logout()">Salir</a>
+            </div>
+        </div>
+
+        <div class="nav" *ngIf="token != null && role == '2'">
+            <div class="navs">
+                <a class="selecNav" (click)="routers(4, '/dashboard')">Productos</a>
+            </div>
+            <div class="navs">
+                <a class="selecNav" (click)="routers(4, '/misProductos')">Mi Carrito</a>
+            </div>
+            <div class="navs">
+                <a class="selecNav" (click)="routers(3, '/miperfil')">Mi Perfil</a>
+            </div>
+            <div class="navsUp">
+                <a class="selecNavUp SignUp" (click)="logout()">Salir</a>
+            </div>
+        </div>
+    
+        
+    </div>
+
+    <div class="nav" *ngIf="token != null && !verify">
+        <div class="navsUp">
+            <a class="selecNavUp SignUp" (click)="logout()">Salir</a>
+        </div>
+    </div>
+   
+    
+</div>
+
+<router-outlet></router-outlet>
+

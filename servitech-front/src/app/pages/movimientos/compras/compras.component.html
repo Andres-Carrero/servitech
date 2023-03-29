@@ -1,0 +1,94 @@
+<div class="content-v2"><br>
+  <h1 style="text-align: center;">Nueva Compra</h1>
+
+  <mat-grid-list [cols]="4" rowHeight="100px">
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Proveedor</mat-label>
+        <mat-select [(ngModel)]="proveedor">
+          <mat-option *ngFor="let item of listProvedores" [value]="item.prov_id">{{item.prov_nombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Moneda de Compra</mat-label>
+        <mat-select [(ngModel)]="moneda" (selectionChange)="changeTypeMoney()">
+          <mat-option *ngFor="let item of listMoneda" [value]="item.id" [disabled]="ocultOptions">{{item.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Productos</mat-label>
+        <input type="text" (input)="validateProducts()" [(ngModel)]="product" matInput [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of listOptionsProductos" [value]="option.prod_nombre" (click)="agregarCarrito(option)">
+            {{option.prod_id}}: {{option.prod_nombre}} ({{option.prod_marca}})
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    
+
+  </mat-grid-list>
+
+    <table class="tableVenta">
+      <thead class="tableHead">
+        <tr>
+          <th>N°</th>
+          <th>Producto</th>
+          <th>Marca</th>
+          <th>Tipo</th>
+          <th>Ubicación</th>
+          <th>Cantidad</th>
+          <th>Precio Unitario ({{moneda}})</th>
+          <th *ngIf="moneda != 'COP'">Conversion a COP</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody class="tableBody">
+        <tr *ngFor="let item of listProductos; let i = index" style="padding-bottom: 10px;">
+          <td>{{item.prod_id}}</td>
+          <td>{{item.prod_nombre}}</td>
+          <td>{{item.prod_marca}}</td>
+          <td>{{item.tipr_descripcion}}</td>
+          <td>{{item.ubi_descripcion}}</td>
+          <td style="width: 100px; text-align: center;">
+            <input type="number" id="cantidadInput_{{i}}" class="inputs" (keyup)="calculate(i)" placeholder="Digite la cantidad" [value]="item.cantidad" [(ngModel)]="item.cantidad" >
+          </td>
+          <td>
+            <input type="number" id="precioInput_{{i}}" class="inputs" (keyup)="calculate(i)" placeholder="Digite Precio Unitario" [value]="item.precio" [(ngModel)]="item.precio">
+          </td>
+          <td *ngIf="moneda != 'COP'">{{ item.loading ? 'Calculando...': item.convertView}}</td>
+          <td>{{item.loading ? 'Calculando...':item.precioTotalView}}</td>
+  
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td *ngIf="moneda != 'COP'"></td>
+          <td >
+            <p style="line-height: 0; margin-top: 10px; margin-right: 15px; float: right;" >Total a pagar</p>
+          </td>
+          <td>{{totalView}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br><br>
+  
+  <div class="buttonsForms" >
+    <button  mat-raised-button color="primary" class="buttons" (click)="saved()">
+      <mat-icon  style="margin-right: 10px;">shopping_cart</mat-icon> Comprar Productos
+    </button>
+  </div>
+</div>

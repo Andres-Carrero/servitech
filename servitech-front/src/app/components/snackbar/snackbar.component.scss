@@ -1,0 +1,41 @@
+.snackbars{
+    display: flex;
+}
+
+.text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    /*margin-top: 5px;
+    */
+}
+
+.snack{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 5px;
+    color: rgb(255, 255, 255);
+}
+
+.success{
+    background-color: #30ce08;
+}
+
+.error{
+    background-color: #cf0e0e;
+}
+
+.warn{
+    background-color: #ca9e0cda;
+}
+
+.loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    color: rgba(255, 255, 255, 0.5);
+}
